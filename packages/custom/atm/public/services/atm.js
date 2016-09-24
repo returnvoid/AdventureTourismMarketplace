@@ -1,27 +1,33 @@
 (function() {
     'use strict';
 
-    function Atm($http, $q) {
+    function AtmLogService(){
+      return{
+        log: function(message){
+          console.log.apply(message);
+        }
+      }
+    } 
+    function AtmTestService($http, $q) {
         return {
             name: 'atm',
-            checkCircle: function(circle) {
-                var deferred = $q.defer();
-
-                $http.get('/api/atm/example/' + circle).success(function(response) {
-                    deferred.resolve(response);
-                }).error(function(response) {
-                    deferred.reject(response);
-                });
-                return deferred.promise;
-
+            test: function(){
+              var deferred = $q.defer();
+              $http.get('/api/atm/test').then(function(response){
+                deferred.resolve(response);
+              }, function(response){
+                deferred.reject(response);
+              });
+              return deferred.promise;
             }
         };
     }
 
     angular
         .module('mean.atm')
-        .factory('Atm', Atm);
+        .factory('AtmLogService', AtmLogService)
+        .factory('AtmTestService', AtmTestService);
 
-    Atm.$inject = ['$http', '$q'];
+    AtmTestService.$inject = ['$http', '$q'];
 
 })();

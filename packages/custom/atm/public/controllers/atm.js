@@ -3,27 +3,24 @@
 
     /* jshint -W098 */
 
-    function AtmController($scope, Global, Atm, $stateParams) {
+    function HomeController($scope, Global, AtmTestService, AtmLogService, $stateParams) {
+      var vm = this;
+      console.log('here home');
+      
+    }
+    
+    function SearchBarController($scope, Global, $stateParams) {
         $scope.global = Global;
         $scope.package = {
             name: 'atm'
         };
-
-        $scope.checkCircle = function() {
-            Atm.checkCircle($stateParams.circle).then(function(response) {
-                $scope.res = response;
-                $scope.resStatus = 'info';
-            }, function(error) {
-                $scope.res = error;
-                $scope.resStatus = 'danger';
-            });
-        };
     }
 
     angular
-        .module('mean.atm')
-        .controller('AtmController', AtmController);
+      .module('mean.atm')
+      .controller('HomeController', HomeController)
+      .controller('SearchBarController', SearchBarController);
 
-    AtmController.$inject = ['$scope', 'Global', 'Atm', '$stateParams'];
+    HomeController.$inject = ['$scope', 'Global', '$stateParams', 'AtmLogService', 'AtmTestService'];
 
 })();
