@@ -7,10 +7,7 @@
 
         var users = require('../controllers/users');
         var tours = require('../controllers/tours');
-        var wishlists = require('../controllers/wishlists')
-
-        var requiresAdmin = circles.controller.hasCircle('admin');
-        var requiresLogin = circles.controller.hasCircle('authenticated');
+        var wishlists = require('../controllers/wishlists');
 
         // app.get('/api/atm/example/anyone', function (req, res) {
         //     res.send('Anyone can access this');
