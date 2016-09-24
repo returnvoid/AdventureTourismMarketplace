@@ -32,10 +32,6 @@
 
         app.get('/api/atm/wishlists', wishlists.all);
 
-        app.get('/api/atm/wishlists', wishlists.test);
-
-        app.get('/api/atm/wishlists/:wishlistId', function(req, res) {
-            console.log(req);
-        });
+        app.get('/api/atm/test', wishlists.test);
     };
 })();

@@ -16,6 +16,14 @@ exports.all = function(req, res) {
 };
 
 exports.test = function(req, res) {
-    console.log(req);
-    res.send("Hey, you're talking to my API!!!!");
+    Wishlists.find({_id: '57e6f403dba0135efffa0b5b'}).exec(function(err, wishlist) {
+        console.log(wishlist);
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(wishlist);
+        }
+    });
 };

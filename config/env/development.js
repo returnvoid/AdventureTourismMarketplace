@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/atm',
+  db: 'mongodb://hackathon:hackathon@ds041526.mlab.com:41526/adventure-hackathon',
   debug: true,
   logging: {
     format: 'tiny'
