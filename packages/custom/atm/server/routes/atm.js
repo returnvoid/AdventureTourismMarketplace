@@ -5,27 +5,40 @@
     // The Package is past automatically as first parameter
     module.exports = function(Atm, app, auth, database, circles) {
 
+        var users = require('../controllers/users');
+        var tours = require('../controllers/tours');
+        var wishlists = require('../controllers/wishlists')
+
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
 
-        app.get('/api/atm/example/anyone', function(req, res) {
-            res.send('Anyone can access this');
+        // app.get('/api/atm/example/anyone', function (req, res) {
+        //     res.send('Anyone can access this');
+        // });
+
+        // app.get('/api/atm/example/auth', requiresLogin, function (req, res) {
+        //     res.send('Only authenticated users can access this');
+        // });
+
+        // app.get('/api/atm/example/admin', requiresAdmin, function (req, res) {
+        //     res.send('Only users with Admin role can access this');
+        // });
+
+        app.get('/api/atm/', function (req, res) {
+            res.send("Hey, you're talking to my API!!!!");
         });
 
-        app.get('/api/atm/example/auth', requiresLogin, function(req, res) {
-            res.send('Only authenticated users can access this');
-        });
+        app.get('/api/atm/test', users.test);
 
-        app.get('/api/atm/example/admin', requiresAdmin, function(req, res) {
-            res.send('Only users with Admin role can access this');
-        });
+        // Get a list of Tours
+        app.get('/api/atm/tours', tours.all);
 
-        app.get('/', function(req, res) {
-            Atm.render('index', {
-                package: 'atm'
-            }, function(err, html) {
-              res.send(html);
-            });
+        app.get('/api/atm/wishlists', wishlists.all);
+
+        app.get('/api/atm/wishlists', wishlists.test);
+
+        app.get('/api/atm/wishlists/:wishlistId', function(req, res) {
+            console.log(req);
         });
     };
 })();
