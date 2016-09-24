@@ -14,6 +14,23 @@ var Atm = new Module('atm')
 Atm.register(function(app, auth, database, circles) {
 
   //We enable routing. By default the Package Object is passed to the routes
+  
+  
+  var permitCrossDomainRequests = function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  // some browsers send a pre-flight OPTIONS request to check if CORS is enabled so you have to also respond to that
+  if ('OPTIONS' === req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+  };
+  
+  app.use(permitCrossDomainRequests);
+  
   Atm.routes(app, auth, database, circles);
 
   //We are adding a link to the main menu for all authenticated users
