@@ -43,26 +43,46 @@ exports.show = function(req, res, next) {
 
 exports.update = function(req, res) {
 
-    // if req.body
-    Wishlists.update(
-        { _id: req.params.id},
-        { $push:
-            {
-                tours: {
-                    _id: req.body['tourId'],
-                    name: req.body['tourName'],
-                    votes: 0
+    if (req.body['operation'] == 'addTour') {
+        Wishlists.update(
+            { _id: req.params.id},
+            { $push:
+                {
+                    tours: {
+                        _id: req.body['tourId'],
+                        name: req.body['tourName'],
+                        votes: 0
+                    }
                 }
+            }).exec(function(err, response) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.jsonp({status: 200});
             }
-        }).exec(function(err, response) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-            res.jsonp({status: 200});
-        }
-    });
+        });
+    }
+    else if (req.body['operation'] == 'removeTour') {
+        Wishlists.update(
+            { _id: req.params.id},
+            { $pull:
+                {
+                    tours: {
+                        _id: req.body['tourId'],
+                    }
+                }
+            }).exec(function(err, response) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.jsonp({status: 200});
+            }
+        });
+    }
 };
 
 
