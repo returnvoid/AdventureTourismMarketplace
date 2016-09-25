@@ -21,17 +21,17 @@
         //     res.send('Only users with Admin role can access this');
         // });
 
-        app.get('/api/atm/', function (req, res) {
+        app.get('/api/atm/test', function (req, res) {
             res.send("Hey, you're talking to my API!!!!");
         });
-
-        app.get('/api/atm/test', users.test);
 
         // Get a list of Tours
         app.get('/api/atm/tours', tours.all);
 
         app.get('/api/atm/wishlists', wishlists.all);
 
-        app.get('/api/atm/test', wishlists.test);
+        app.get('/api/atm/wishlists/:id', wishlists.show);
+
+        app.post('/api/atm/wishlists', wishlists.create);
     };
 })();

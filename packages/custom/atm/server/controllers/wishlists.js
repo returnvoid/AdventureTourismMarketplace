@@ -3,7 +3,6 @@ var mongoose = require('mongoose'),
     _ = require('lodash');
 
 exports.all = function(req, res) {
-    console.log(req);
     Wishlists.find().exec(function(err, wishlists) {
         if (err) {
             res.render('error', {
@@ -15,9 +14,11 @@ exports.all = function(req, res) {
     });
 };
 
-exports.test = function(req, res) {
-    Wishlists.find({_id: '57e6f403dba0135efffa0b5b'}).exec(function(err, wishlist) {
-        console.log(wishlist);
+exports.create = function(req, res) {
+    console.log(req.body);
+    var wishlist = new Wishlists(req.body);
+
+    wishlist.save(function(err) {
         if (err) {
             res.render('error', {
                 status: 500
@@ -27,3 +28,16 @@ exports.test = function(req, res) {
         }
     });
 };
+
+exports.show = function(req, res, next) {
+    Wishlists.find({_id: req.params.id}).exec(function(err, wishlist) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(wishlist);
+        }
+    });
+};
+
