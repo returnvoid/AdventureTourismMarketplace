@@ -17,7 +17,6 @@
         app.get('/api/atm/tours', tours.all);
         app.get('/api/atm/tours/:id', tours.show);
 
-
         // Wishlists
         app.get('/api/atm/wishlists', wishlists.all);
         app.get('/api/atm/wishlists/:id', wishlists.show);

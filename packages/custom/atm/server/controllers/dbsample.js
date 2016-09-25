@@ -9,7 +9,7 @@ db.users.update(
           },
           {
             _id: db.wishlists.find()[1]._id,
-            name: 'db.wishlists.find()[1].name,'
+            name: db.wishlists.find()[1].name,
           },
         ],
         wishlistsJoined: [
@@ -30,13 +30,46 @@ db.students.update( { _id: 1 }, { $rename: { 'nickname': 'alias', 'cell': 'mobil
 
 db.students.update( { _id: 1 }, { $rename: { "name.first": "name.fname" } } )
 
-db.wishlists.update({}, { $rename: {"users.id": "users._id"}})
-
 db.wishlists.update(
   { name: "Thanksgiving Weekend" },
-  { $pull:
     { tours:
-      { name: 'Half Day Whale Watching' }
+            {
+                $push: {
+                    _id: '57e70d8651bc3f0dbab89212',
+                    name: "Half Day Whale Watching",
+                    votes: 0
+                }
+            }
+  }
+)
+
+db.wishlists.update(
+  {name:  "Thanksgiving Weekend"},
+  { $push:
+    {
+      tours: {
+        _id: '57e70d8651bc3f0dbab89212',
+        name: "Half Day Whale Watching",
+        votes: 0
+      }
     }
   }
+  )
+}
+
+db.wishlists.update(
+  { },
+  { $pull: { tours: { _id: null } } },
+)
+
+db.collection.update(
+    { "_id": ID, "playlists._id": "58"},
+    { "$push":
+        {"playlists.$.musics":
+            {
+                "name": "test name",
+                "duration": "4.00"
+            }
+        }
+    }
 )

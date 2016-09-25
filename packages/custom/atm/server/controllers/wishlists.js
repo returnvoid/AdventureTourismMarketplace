@@ -15,7 +15,6 @@ exports.all = function(req, res) {
 };
 
 exports.create = function(req, res) {
-    console.log(req.body);
     var wishlist = new Wishlists(req.body);
 
     wishlist.save(function(err) {
@@ -42,7 +41,6 @@ exports.show = function(req, res, next) {
 };
 
 exports.update = function(req, res) {
-
     if (req.body['operation'] == 'addTour') {
         Wishlists.update(
             { _id: req.params.id},
@@ -83,6 +81,18 @@ exports.update = function(req, res) {
             }
         });
     }
+    else if (req.body['operation'] == 'vote') {
+        Wishlists.update(
+            { '_id': req.params.id, 'tours._id': req.body['tourId']},
+            { $inc: { "tours.$.votes" : 1 } }
+        ).exec(function(err, response) {
+            if (err) {
+                res.render('error', {
+                    status: 500
+                });
+            } else {
+                res.jsonp({status: 200});
+            }
+        });
+    }
 };
-
-
