@@ -30,7 +30,7 @@ exports.create = function(req, res) {
 };
 
 exports.show = function(req, res, next) {
-    Wishlists.find({_id: req.params.id}).exec(function(err, wishlist) {
+    Wishlists.findOne({_id: req.params.id}).exec(function(err, wishlist) {
         if (err) {
             res.render('error', {
                 status: 500
