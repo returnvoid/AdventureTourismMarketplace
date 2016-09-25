@@ -42,6 +42,8 @@ exports.show = function(req, res, next) {
 };
 
 exports.update = function(req, res) {
+
+    // if req.body
     Wishlists.update(
         { _id: req.params.id},
         { $push:
@@ -58,7 +60,7 @@ exports.update = function(req, res) {
                 status: 500
             });
         } else {
-            res.jsonp(status: 200);
+            res.jsonp({status: 200});
         }
     });
 };
