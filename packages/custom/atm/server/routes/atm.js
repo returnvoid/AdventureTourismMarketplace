@@ -9,18 +9,6 @@
         var tours = require('../controllers/tours');
         var wishlists = require('../controllers/wishlists');
 
-        // app.get('/api/atm/example/anyone', function (req, res) {
-        //     res.send('Anyone can access this');
-        // });
-
-        // app.get('/api/atm/example/auth', requiresLogin, function (req, res) {
-        //     res.send('Only authenticated users can access this');
-        // });
-
-        // app.get('/api/atm/example/admin', requiresAdmin, function (req, res) {
-        //     res.send('Only users with Admin role can access this');
-        // });
-
         app.get('/api/atm/test', function (req, res) {
             res.send("Hey, you're talking to my API!!!!");
         });
@@ -34,6 +22,7 @@
         app.get('/api/atm/wishlists', wishlists.all);
         app.get('/api/atm/wishlists/:id', wishlists.show);
         app.post('/api/atm/wishlists', wishlists.create);
+        app.post('api/atm/wishlists/:id', wishlists.update);
 
         // Users
         app.get('/api/atm/users', users.all);

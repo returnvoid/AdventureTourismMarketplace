@@ -17,7 +17,9 @@ var WishlistSchema = new Schema ({
       user_id: Schema.ObjectId,
     }
   ],
-  tours: [Schema.ObjectId]
+  tours: [{
+
+  }]
 });
 
 mongoose.model('Wishlists', WishlistSchema);

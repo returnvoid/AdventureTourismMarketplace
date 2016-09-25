@@ -41,3 +41,25 @@ exports.show = function(req, res, next) {
     });
 };
 
+exports.update = function(req, res, next) {
+    Wishlists.update(
+        { _id: req.params.id},
+        { tours: {
+            $push: {
+                id: req.params.tourId,
+                name: req.params.tourName,
+                votes: 0
+            }
+        }}
+        ).exec(function(err, wishlist) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(wishlist);
+        }
+    });
+};
+
+
