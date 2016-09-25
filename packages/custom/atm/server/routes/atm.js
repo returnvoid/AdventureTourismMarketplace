@@ -8,10 +8,8 @@
         var users = require('../controllers/users');
         var tours = require('../controllers/tours');
         var wishlists = require('../controllers/wishlists');
-
-        app.get('/api/atm/test', function (req, res) {
-            res.send("Hey, you're talking to my API!!!!");
-        });
+        var giveaways = require('../controllers/giveaways');
+        var entries = require('../controllers/entries');
 
         // Tours
         app.get('/api/atm/tours', tours.all);
@@ -27,5 +25,11 @@
         app.get('/api/atm/users', users.all);
         app.get('/api/atm/users/:id', users.show);
 
+        // Giveaways
+        app.get('/api/atm/giveaways', giveaways.all);
+        app.get('/api/atm/giveaways/:id', giveaways.show);
+
+        app.get('/api/atm/entries', entries.all);
+        app.post('/api/atm/giveaways/:id/enter', entries.create);
     };
 })();

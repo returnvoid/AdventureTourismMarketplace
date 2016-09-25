@@ -9,14 +9,9 @@ var mongoose = require('mongoose');
  * Users Schema.
  */
 var UserSchema = new mongoose.Schema ({
-    firstName: {
-        type: String,
-        trim: true
-    },
-    lastName: {
-        type: String,
-        trim: true
-    }
+    firstName: String,
+    lastName: String,
+    points: Number
 });
 
 mongoose.model('Users', UserSchema);

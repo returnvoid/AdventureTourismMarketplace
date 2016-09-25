@@ -58,7 +58,7 @@ exports.update = function(req, res) {
                     status: 500
                 });
             } else {
-                res.jsonp({status: 200});
+                res.send(200);
             }
         });
     }
@@ -77,7 +77,7 @@ exports.update = function(req, res) {
                     status: 500
                 });
             } else {
-                res.jsonp({status: 200});
+                res.send(200);
             }
         });
     }
@@ -91,7 +91,7 @@ exports.update = function(req, res) {
                     status: 500
                 });
             } else {
-                res.jsonp({status: 200});
+                res.send(200);
             }
         });
     }

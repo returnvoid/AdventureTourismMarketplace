@@ -73,3 +73,29 @@ db.collection.update(
         }
     }
 )
+
+
+db.tours.remove({'_id': ObjectId('57e802c49979df3c4dede2fb')});
+db.giveaways.insert(
+
+  )
+
+  giveaways
+
+  tourId
+  tourName
+  tourValue
+  description
+  numberOfPrizes
+  tokensRequired
+  startTime
+  endTime
+
+
+  entries
+  giveaway_id
+  user_id
+  tokensEntered
+
+
+
