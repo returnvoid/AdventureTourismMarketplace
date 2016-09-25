@@ -12,4 +12,16 @@ exports.all = function(req, res) {
             res.jsonp(tours);
         }
     });
-}
+};
+
+exports.show = function(req, res, next) {
+    Tours.findOne({_id: req.params.id}).exec(function(err, tours) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(tours);
+        }
+    });
+};

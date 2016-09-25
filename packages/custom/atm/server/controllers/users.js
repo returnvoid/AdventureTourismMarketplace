@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Users = mongoose.model('Users'),
     _ = require('lodash');
 
-exports.test = function(req, res) {
+exports.all = function(req, res) {
     Users.find().exec(function(err, users) {
         if (err) {
             res.render('error', {
@@ -13,3 +13,15 @@ exports.test = function(req, res) {
         }
     });
 }
+
+exports.show = function(req, res, next) {
+    Users.findOne({_id: req.params.id}).exec(function(err, users) {
+        if (err) {
+            res.render('error', {
+                status: 500
+            });
+        } else {
+            res.jsonp(users);
+        }
+    });
+};
