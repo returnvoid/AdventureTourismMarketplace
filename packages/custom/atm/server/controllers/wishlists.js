@@ -41,23 +41,24 @@ exports.show = function(req, res, next) {
     });
 };
 
-exports.update = function(req, res, next) {
+exports.update = function(req, res) {
     Wishlists.update(
         { _id: req.params.id},
-        { tours: {
-            $push: {
-                id: req.params.tourId,
-                name: req.params.tourName,
-                votes: 0
+        { $push:
+            {
+                tours: {
+                    _id: req.body['tourId'],
+                    name: req.body['tourName'],
+                    votes: 0
+                }
             }
-        }}
-        ).exec(function(err, wishlist) {
+        }).exec(function(err, response) {
         if (err) {
             res.render('error', {
                 status: 500
             });
         } else {
-            res.jsonp(wishlist);
+            res.jsonp(status: 200);
         }
     });
 };

@@ -22,7 +22,7 @@
         app.get('/api/atm/wishlists', wishlists.all);
         app.get('/api/atm/wishlists/:id', wishlists.show);
         app.post('/api/atm/wishlists', wishlists.create);
-        app.post('api/atm/wishlists/:id', wishlists.update);
+        app.put('/api/atm/wishlists/:id', wishlists.update);
 
         // Users
         app.get('/api/atm/users', users.all);
